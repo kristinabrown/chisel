@@ -59,19 +59,19 @@ class ChiselTest < Minitest::Test
 
   def test_it_can_sub_strong_for_two_stars
     text = "this is **bold**"
-    @parser.stars?(text)
-    assert "this is <strong>bold</strong>", @parser.star_eval(text)
+    @stars = @parser.stars?(text)
+    assert_equal "this is <strong>bold</strong>", @parser.star_eval(text)
   end
 
   def test_it_can_sub_em_for_one_star_next_to_text
     text = "this is an *italics*"
-    @parser.stars?(text)
-    assert "this is an <em>italics</em>", @parser.star_eval(text)
+    @stars = @parser.stars?(text)
+    assert_equal "this is an <em>italics</em>", @parser.star_eval(text)
   end
 
   def test_it_can_sub_both_em_and_strong_in_one_string
     text = "My *emphasized and **stronged** text* is awesome"
-    @parser.stars?(text)
+    @stars = @parser.stars?(text)
     assert_equal "My <em>emphasized and <strong>stronged</strong> text</em> is awesome", @parser.star_eval(text)
   end
 
