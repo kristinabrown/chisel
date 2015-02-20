@@ -1,9 +1,9 @@
-require 'pry'                                # => true
+require 'pry'
 class Chisel
-  attr_accessor :paragraph, :header, :stars  # => nil
+  attr_accessor :paragraph, :header, :stars
 
   def initialize
-    @stars = 0    # => 0
+    @stars = 0
   end
 
   def parse(text)
@@ -17,7 +17,6 @@ class Chisel
      split_text.map do |line|
       if line.include? "#"
         @header = parse_header(line)
-        @header
       else
         @paragraph = parse_paragraph(line)
       end
@@ -39,8 +38,8 @@ class Chisel
   end
 
   def parse_paragraph(text)
-    front = "<p>"
-    back = "</p>"
+    front = "<p>\n"
+    back = "\n</p>"
     output_line(front, text, back)
   end
 
@@ -61,8 +60,7 @@ class Chisel
   end
 
   def star_eval(text)
-    @stars = 6
-    while @stars >= 0
+    while @stars > 0
       if text.include?("**")
         if text.include?(" **")
           text.sub!("**", "<strong>")
@@ -90,14 +88,8 @@ class Chisel
 
 end
 
-parser = Chisel.new  # => #<Chisel:0x007fd3040649e0 @stars=0>
+parser = Chisel.new
 
-# puts parser.stars?("this is a **bold** word and *italics* word")
- puts parser.star_eval("this is a **bold** word and *italics* word")
-puts parser.parse(File.read("./chisel_sample.md"))  # ~> Errno::ENOENT: No such file or directory @ rb_sysopen - ./chisel_sample.md
-
-# ~> Errno::ENOENT
-# ~> No such file or directory @ rb_sysopen - ./chisel_sample.md
-# ~>
-# ~> /Users/kristinabrown/homework/chisel/chisel.rb:96:in `read'
-# ~> /Users/kristinabrown/homework/chisel/chisel.rb:96:in `<main>'
+#passes
+#puts parser.star_eval("My *emphasized and **stronged** text* is awesome")
+puts parser.parse(File.read("./chisel_sample.md"))
