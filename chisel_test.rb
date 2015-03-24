@@ -3,6 +3,15 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require_relative 'chisel'
 
+
+#test all headers
+#test edge cases
+#add method for deciding if paragraph or header
+#change up stars?
+#star count within star_eval
+#separate methods for strong and em
+
+
 class ChiselTest < Minitest::Test
 
   def setup
@@ -30,7 +39,7 @@ class ChiselTest < Minitest::Test
   end
 
   def test_it_can_split_serveral_lines_into_an_array_of_elements
-    assert_equal ["### a litte header", "and a paragraph"], @parser.splitter("### a litte header\nand a paragraph")
+    assert_equal ["### a little header", "and a paragraph"], @parser.splitter("### a little header\nand a paragraph")
   end
 
   def test_it_can_parse_the_difference_between_paragraph_and_header
@@ -41,7 +50,7 @@ class ChiselTest < Minitest::Test
     assert_equal 2,  @parser.stars?("## a little header\n and *a* paragraph")
   end
 
-# this works but formatting is a nighmare
+# this works but formatting is a nightmare
   def test_it_can_parse_multiple_lines
     skip
     assert_equal ["<h1>My Life in Desserts</h1>", "<h2>Chapter 1: The Beginning</h2>", "<p>\"You just *have* to try the cheesecake,\" he said. \"Ever since it appeared in
